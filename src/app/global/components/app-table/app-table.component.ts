@@ -13,11 +13,13 @@ export class AppTableComponent implements OnInit {
   @Input() displayedColumns: string[];
   @Input() dataSource: any;
 
+
   constructor() { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    
   }
 
   applyFilter(filterValue: string) {
@@ -26,6 +28,11 @@ export class AppTableComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  actionClick(index: number) {
+    console.log('index: ', index);
+
   }
 
 }

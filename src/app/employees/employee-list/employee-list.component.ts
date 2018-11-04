@@ -34,7 +34,7 @@ export class EmployeeListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.columnName = ['name', 'age', 'username', 'hiredate'];
+    this.columnName = ['name', 'age', 'username', 'hiredate', 'actions'];
     this.dataSource = new MatTableDataSource(employees);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
