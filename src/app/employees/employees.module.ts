@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { EmployeeListComponent } from './';
 import { EmployeesRoutingModule } from './employees-routing.module';
 
-const employeeRoutes = [{ path: '', component: EmployeeListComponent }];
+import { MaterialModule } from '../material';
 
 @NgModule({
   declarations: [EmployeeListComponent],
   imports: [
     CommonModule,
+    MaterialModule,
     EmployeesRoutingModule
   ],
 })
