@@ -1,0 +1,20 @@
+{
+  "employees": [
+      {
+          "id": 1,
+          "name": "Guiacomo Guilizzoni",
+          "jobtitle": "Founder & CEO",
+          "age": 40,
+          "username": "Peldi",
+          "hiredate": "2017/10/01"
+      },
+      {
+          "id": 2,
+          "name": "Marco Botton",
+          "jobtitle": "Tuttofare",
+          "age": 38,
+          "username": "Marcopolo",
+          "hiredate": "2001/01/10"
+      }
+  ]
+}
