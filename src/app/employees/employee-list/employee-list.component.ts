@@ -17,6 +17,7 @@ export class EmployeeListComponent implements OnInit {
   
   columnName: string[];
   employees$: Observable<Employee[]>;
+  error$: Observable<String>;
   
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;
@@ -29,12 +30,23 @@ export class EmployeeListComponent implements OnInit {
 
     this.store.dispatch(new employeeActions.LoadEmployeesAction());
     this.employees$ = this.store.pipe(select(fromEmployee.getEmployees));
-    // this.store.subscribe(state => (this.employees = state.employees.employees));
+    this.error$ = this.store.pipe(select(fromEmployee.getError));
 
     // this.dataSource = new MatTableDataSource(this.employees);
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
     
   }
+
+  deleteEmployee(employee: Employee) {
+    if(confirm('Are You Sure You want to Delete the Employee?')) {
+      this.store.dispatch(new employeeActions.DeleteEmployeeAction(employee.id));
+    }
+  }
+
+  editEmployee(employee: Employee) {
+    this.store.dispatch(new employeeActions.LoadEmployeeAction(employee.id));
+  }
+
 
 }
