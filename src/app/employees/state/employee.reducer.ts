@@ -1,4 +1,6 @@
 import * as employeeActions from './employee.actions';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import { Employee } from '../../global/models';
 import * as fromRoot from '../../state/app-state';
 
@@ -35,9 +37,9 @@ export function employeeReducer(
         case employeeActions.EmployeeActionTypes.LOAD_EMPLOYEES_SUCCESS: {
             return {
                 ...state,
+                employees: action.payload,
                 loading: false,
-                loaded: true,
-                employees: action.payload
+                loaded: true
             };
         }
 
@@ -56,3 +58,27 @@ export function employeeReducer(
         }
     }
 }
+
+const getEmployeeFeatureState = createFeatureSelector<EmployeeState>(
+    "employees"
+);
+
+export const getEmployees = createSelector(
+    getEmployeeFeatureState,
+    (state: EmployeeState) => state.employees
+);
+
+export const getEmployeesLoading = createSelector(
+    getEmployeeFeatureState,
+    (state: EmployeeState) => state.loading
+);
+
+export const getEmployeesLoaded = createSelector(
+    getEmployeeFeatureState,
+    (state: EmployeeState) => state.loaded
+);
+
+export const getError = createSelector(
+    getEmployeeFeatureState,
+    (state: EmployeeState) => state.error
+);

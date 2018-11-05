@@ -25,10 +25,10 @@ export class EmployeeService {
     return this.http.post<Employee>(this.endpoint, payload);
   }
 
-  updateEmployee(customer: Employee): Observable<Employee> {
+  updateEmployee(employee: Employee): Observable<Employee> {
     return this.http.patch<Employee>(
       `${this.endpoint}/${employee.id}`,
-      customer
+      employee
     );
   }
 
