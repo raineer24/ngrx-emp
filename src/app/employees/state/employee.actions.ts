@@ -4,8 +4,8 @@ import { Employee } from '../../global/models';
 
 export enum EmployeeActionTypes {
   LOAD_EMPLOYEES = '[Employee] Load Employees',
-  LOAD_EMPLOYEES_FAILURE = '[Employee] Load Employee Failure',
-  LOAD_EMPLOYEES_SUCCESS = '[Employee] Load Employee Success',
+  LOAD_EMPLOYEES_FAILURE = '[Employee] Load Employees Failure',
+  LOAD_EMPLOYEES_SUCCESS = '[Employee] Load Employees Success',
   LOAD_EMPLOYEE = '[Employee] Load Employee',
   LOAD_EMPLOYEE_FAILURE = '[Employee] Load Employee Failure',
   LOAD_EMPLOYEE_SUCCESS = '[Employee] Load Employee Success',
