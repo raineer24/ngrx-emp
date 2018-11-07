@@ -9,26 +9,30 @@ import { Employee } from '../../models';
   styleUrls: ['./app-table.component.scss']
 })
 export class AppTableComponent implements OnInit {
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-  // @ViewChild(MatSort) sort: MatSort;
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   @Input() displayedColumns: string[];
   @Input() dataSource: Observable<Employee[]>;
+
+  employee;
 
   constructor() { }
 
   ngOnInit() {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
+    this.dataSource.subscribe( res => { 
+      this.employee = new MatTableDataSource(res);
+      this.employee.paginator = this.paginator;
+      this.employee.sort = this.sort;    
+    });
   }
 
-  // applyFilter(filterValue: string) {
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(filterValue: string) {
+    this.employee.filter = filterValue.trim().toLowerCase();
 
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
+    if (this.employee.paginator) {
+      this.employee.paginator.firstPage();
+    }
+  }
 
   actionClick(index: number) {
     console.log('index: ', index);
