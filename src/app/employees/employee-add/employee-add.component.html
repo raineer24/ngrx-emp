@@ -1,0 +1,68 @@
+<form [formGroup]="employeeForm" class="example-form">
+
+value: {{ employeeForm.value | json}}
+<br><br>
+
+  <span>Name:</span>
+  <mat-form-field class="example-middle-width">
+    <input matInput formControlName="name">
+  </mat-form-field>
+
+  <span>Area:</span>
+  <mat-button-toggle-group 
+    name="fontStyle" 
+    aria-label="Font Style" 
+    formControlName="area"
+    class="primary">
+    <mat-button-toggle value="services">Services</mat-button-toggle>
+    <mat-button-toggle value="kitchen">Kitchen</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <span>Dob:</span>
+  <mat-form-field class="example-middle-width">
+    <input matInput [matDatepicker]="dobPicker" formControlName="dob" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+    <mat-datepicker #dobPicker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- jobtitle -->
+  areaSelected: {{areaSelected}}
+  <app-dropdown [area]="areaSelected"></app-dropdown>
+
+  <span>Tip Rate:</span>
+  <mat-form-field class="example-middle-width">
+    <mat-select placeholder="Select the Country" formControlName="country">
+      <mat-option *ngFor="let country of countries" [value]="country.value">
+        {{country.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <span>Username:</span>
+  <mat-form-field class="example-middle-width">
+    <input matInput formControlName="username">
+  </mat-form-field>
+
+  <span>Hire Date: </span>
+  <mat-form-field class="example-middle-width">
+    <input matInput [matDatepicker]="hiredate" formControlName="hiredate" placeholder="Choose a date"z>
+    <mat-datepicker-toggle matSuffix [for]="hiredate"></mat-datepicker-toggle>
+    <mat-datepicker #hiredate></mat-datepicker>
+  </mat-form-field>
+
+  <span>TipRate: </span>
+  <mat-form-field class="example-middle-width">
+    <input matInput formControlName="tiprate">
+  </mat-form-field>
+
+  <span>Status: </span>
+  <mat-slide-toggle color="primary" formControlName="status">Status</mat-slide-toggle>
+
+  <div class="example-button-row">
+    <button mat-button (click)="onBack()">Back</button>
+    <button mat-raised-button color="primary" (click)="createEmployee()">Save</button>
+  </div>
+
+</form>
+
+

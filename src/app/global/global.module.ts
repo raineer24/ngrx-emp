@@ -1,12 +1,13 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AppTableComponent } from './components';
 import { MaterialModule } from '../material';
+import { AppTableComponent, AppDropdownComponent } from './components';
 
 @NgModule({
   declarations: [
-    AppTableComponent
+    AppTableComponent,
+    AppDropdownComponent
   ],
   imports: [
     CommonModule,
@@ -14,6 +15,7 @@ import { MaterialModule } from '../material';
   ],
   exports: [
     AppTableComponent,
+    AppDropdownComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

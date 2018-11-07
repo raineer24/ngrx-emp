@@ -1,0 +1,9 @@
+<span>Job title:</span>
+<mat-form-field class="example-middle-width">
+  <mat-select placeholder="Select Job Title" formControlName="jobtitle">
+    <mat-option *ngFor="let pos of positions" [value]="pos.value">
+      {{pos.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
