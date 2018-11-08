@@ -19,10 +19,11 @@ import { CountryService } from '../countries/country.service';
 
 import { EmployeeListComponent, EmployeeInfoComponent } from './';
 import { EmployeeFormComponent } from './shared/employee-form/employee-form.component';
+import { RatePipe } from './shared/rate.pipe';
 
 
 @NgModule({
-  declarations: [EmployeeListComponent, EmployeeInfoComponent, EmployeeFormComponent],
+  declarations: [EmployeeListComponent, EmployeeInfoComponent, EmployeeFormComponent, RatePipe],
   imports: [
     CommonModule,
     ReactiveFormsModule, FormsModule,
