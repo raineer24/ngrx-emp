@@ -1,6 +1,6 @@
 export interface Country {
-  value: string;
-  viewValue: string;
+  alpha2Code: string;
+  nativeName: string;
 }
 
 

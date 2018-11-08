@@ -1,0 +1,95 @@
+<form [formGroup]="employeeForm" class="form">
+
+  value: {{ employeeForm.value | json}}
+  
+  <div class="form__group">
+    <div class="form__group__field">  
+      <span class="fieldname">Name:</span>
+      <mat-form-field>
+        <input matInput formControlName="name">
+      </mat-form-field>
+    </div>
+
+    <div class="form__group__field">  
+      <span class="fieldname">Area:</span>
+      <mat-button-toggle-group
+        name="fontStyle"
+        color="primary"
+        aria-label="Font Style"
+        formControlName="area">
+        <mat-button-toggle value="services">Services</mat-button-toggle>
+        <mat-button-toggle value="kitchen">Kitchen</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <div class="form__group__field">
+      <span class="fieldname">Dob:</span>
+      <mat-form-field>
+        <input matInput [matDatepicker]="dobPicker" formControlName="dob" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+      
+    <div class="form__group__field">
+      <span class="fieldname">Job title:</span>
+      <app-dropdown [area]="areaSelected" (jobSelected)=newJob($event)></app-dropdown>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <div class="form__group__field">
+      <span class="fieldname">Country:</span>
+      <mat-form-field>
+        <mat-select placeholder="Select the Country" formControlName="country">
+          <mat-option *ngFor="let country of (countries | async)" [value]="country.alpha2Code">
+            {{country.nativeName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <div class="form__group__field">
+      <span class="fieldname">Username:</span>
+      <mat-form-field>
+        <input matInput formControlName="username">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <div class="form__group__field">      
+      <span class="fieldname">Hire Date:</span>
+      <mat-form-field>
+        <input matInput [matDatepicker]="hiredatePicker" formControlName="hiredate" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="hiredatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #hiredatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="form__group__field" *ngIf="enableTipRate">
+      <span class="fieldname">TipRate: </span>
+      <mat-form-field>
+        <input matInput formControlName="tiprate" [value]="employeeForm.get('tiprate').value | number : '1.2'" >
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div class="form__group">
+    <div class="form__group__field">
+      <span class="fieldname">Status: </span>
+      <mat-slide-toggle color="primary" formControlName="status">Status</mat-slide-toggle>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <div class="form__group__buttons">
+      <button mat-button (click)="onBack()">Back</button>
+      <button mat-raised-button color="primary" (click)="createEmployee()">Save</button>
+    </div>
+  </div>
+  
+</form>
