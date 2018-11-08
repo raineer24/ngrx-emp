@@ -1,5 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+
+export interface Positions {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-dropdown',
   templateUrl: './app-dropdown.component.html',
@@ -8,10 +14,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class AppDropdownComponent implements OnInit {
   @Output() jobSelected: EventEmitter<any> = new EventEmitter();
   private _area:string;
-  
-  @Input() set area (area:string){
-    console.log(area)
+  positions: Positions[];
 
+  @Input() set area (area:string){
     if (!area) return;
 
     this._area = area;
@@ -30,15 +35,13 @@ export class AppDropdownComponent implements OnInit {
     }
   }
 
-  positions: any[];
-
   constructor() { }
 
   ngOnInit() {
   
   }
 
-  getServicePositions() : any[] {
+  getServicePositions() : Positions[] {
     return [
       {value: 'manager', viewValue: 'Manager'},
       {value: 'host', viewValue: 'Host'},
@@ -48,7 +51,7 @@ export class AppDropdownComponent implements OnInit {
     ];
   }
 
-  getKitchenPositions() : any[] {
+  getKitchenPositions() : Positions[] {
     return[
       {value: 'chef', viewValue: 'Chef'},
       {value: 'sousChef', viewValue: 'Sous Chef'},
