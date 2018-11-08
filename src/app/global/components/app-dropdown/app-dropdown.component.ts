@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
@@ -6,19 +6,16 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./app-dropdown.component.scss']
 })
 export class AppDropdownComponent implements OnInit {
+  @Output() jobSelected: EventEmitter<any> = new EventEmitter();
+  private _area:string;
+  
+  @Input() set area (area:string){
+    console.log(area)
 
-  @Input() area: any;
+    if (!area) return;
 
-  positions: any[];
-
-  constructor() { }
-
-  ngOnInit() {
-
-    this.area = 'services';
-    console.log('dropdown: ', this.area);
-    
-    switch (this.area) {
+    this._area = area;
+    switch (this._area) {
       case 'services':
         this.positions = this.getServicePositions();
         break;
@@ -33,26 +30,35 @@ export class AppDropdownComponent implements OnInit {
     }
   }
 
-  receiveMessage($event) {
-    this.area = $event
+  positions: any[];
+
+  constructor() { }
+
+  ngOnInit() {
+  
   }
 
   getServicePositions() : any[] {
     return [
-      {value: 'manager-0', viewValue: 'Manager'},
-      {value: 'host-1', viewValue: 'Host'},
-      {value: 'tuttofare-2', viewValue: 'Tuttofare'},
-      {value: 'waitress-3', viewValue: 'Waitress'},
-      {value: 'diningRoomManagers-4', viewValue: 'Dining room managers'}
+      {value: 'manager', viewValue: 'Manager'},
+      {value: 'host', viewValue: 'Host'},
+      {value: 'tuttofare', viewValue: 'Tuttofare'},
+      {value: 'waitress', viewValue: 'Waitress'},
+      {value: 'diningRoomManagers', viewValue: 'Dining room managers'}
     ];
   }
 
   getKitchenPositions() : any[] {
     return[
-      {value: 'chef-0', viewValue: 'Chef'},
-      {value: 'sousChef-1', viewValue: 'Sous Chef'},
-      {value: 'dishwasher-2', viewValue: 'Dishwasher'},
-      {value: 'cook-3', viewValue: 'Cook'}
+      {value: 'chef', viewValue: 'Chef'},
+      {value: 'sousChef', viewValue: 'Sous Chef'},
+      {value: 'dishwasher', viewValue: 'Dishwasher'},
+      {value: 'cook', viewValue: 'Cook'}
     ];
+  }
+
+  onChangeJob(value) {
+    console.log(value);
+    this.jobSelected.emit(value);
   }
 }
