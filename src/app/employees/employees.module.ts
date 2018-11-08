@@ -13,11 +13,16 @@ import { employeeReducer } from './state/employee.reducer';
 import { EmployeeEffect } from './state/employee.effects';
 import { EmployeeService } from './employee.service';
 
-import { EmployeeListComponent, EmployeeAddComponent } from './';
+import { countryReducer } from '../countries/state/country.reducer';
+import { CountryEffect } from '../countries/state/country.effects';
+import { CountryService } from '../countries/country.service';
+
+import { EmployeeListComponent, EmployeeInfoComponent } from './';
+import { EmployeeFormComponent } from './shared/employee-form/employee-form.component';
 
 
 @NgModule({
-  declarations: [EmployeeListComponent, EmployeeAddComponent],
+  declarations: [EmployeeListComponent, EmployeeInfoComponent, EmployeeFormComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule, FormsModule,
@@ -25,10 +30,12 @@ import { EmployeeListComponent, EmployeeAddComponent } from './';
     MaterialModule,
     EmployeesRoutingModule,
     StoreModule.forFeature('employees', employeeReducer),
-    EffectsModule.forFeature([EmployeeEffect])
+    EffectsModule.forFeature([EmployeeEffect]),
+    StoreModule.forFeature('countries', countryReducer),
+    EffectsModule.forFeature([CountryEffect])
   ],
   providers: [
-    EmployeeService
+    EmployeeService, CountryService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
