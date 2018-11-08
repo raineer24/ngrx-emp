@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EmployeeListComponent, EmployeeAddComponent } from './';
+import { EmployeeListComponent, EmployeeInfoComponent } from './';
 
 const routes: Routes = [
   { path: '', component: EmployeeListComponent},
-  { path: 'newuser', component: EmployeeAddComponent},
+  { path: 'newuser', component: EmployeeInfoComponent},
 ];
 
 @NgModule({
