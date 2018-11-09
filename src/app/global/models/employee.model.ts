@@ -5,9 +5,10 @@ export interface Employee {
     dob: string;
     jobtitle: string;
     country: string;
-    age: number;
     username: string;
     hiredate: string;
-    tiprate: string;
+    tiprate?: string;
     status: string;
+    action?: string;
+    age?: number;
   }
