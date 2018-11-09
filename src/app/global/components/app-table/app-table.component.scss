@@ -1,14 +1,22 @@
+.component {
+  padding: 2em;
+
+  &__search {
+    width: 30em;
+    
+    .mat-form-field-label {
+      margin-left: 2em;
+    }
+
+    .mat-form-field-flex {
+      font-size: 14px;
+      width: 100%;
+    }
+  }
+}
+
 table {
   width: 100%;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-td, th {
-  // width: 25%;
 }
 
 th.mat-sort-header-sorted {

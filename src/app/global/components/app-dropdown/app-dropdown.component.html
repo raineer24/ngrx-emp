@@ -1,9 +1,14 @@
 <mat-form-field class="example-middle-width">
-  <mat-select 
-      formControlName="jobtitle" 
+  <mat-select
+      [disabled]="isDisabled"
+      [(value)]="selected"
+      formControlName="jobtitle"
       (selectionChange)="onChangeJob($event.value)">
     <mat-option *ngFor="let pos of positions" [value]="pos.value" >
       {{pos.viewValue}}
     </mat-option>
   </mat-select>
+  <mat-error>
+      Job title is required
+  </mat-error>
 </mat-form-field>

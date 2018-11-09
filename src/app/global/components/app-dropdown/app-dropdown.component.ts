@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-
 export interface Positions {
   value: string;
   viewValue: string;
@@ -15,7 +14,8 @@ export class AppDropdownComponent implements OnInit {
   @Output() jobSelected: EventEmitter<any> = new EventEmitter();
   private _area:string;
   positions: Positions[];
-
+  @Input() selected: string;
+  @Input() isDisabled: any;
   @Input() set area (area:string){
     if (!area) return;
 
@@ -37,9 +37,7 @@ export class AppDropdownComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  
-  }
+  ngOnInit() {}
 
   getServicePositions() : Positions[] {
     return [
@@ -61,7 +59,6 @@ export class AppDropdownComponent implements OnInit {
   }
 
   onChangeJob(value) {
-    console.log(value);
     this.jobSelected.emit(value);
   }
 }

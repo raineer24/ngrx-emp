@@ -1,10 +1,11 @@
 
-<app-table 
+<app-table
     [displayedColumns]="columnName" 
-    [dataSource]="employees$">
+    [dataSource]="employees$"
+    (actionButton)="toggleButton($event)">
 </app-table>
 
-<button mat-raised-button color="primary" [routerLink]="['/newuser']">
+<button mat-raised-button color="primary" (click)="addEmployee()">
     <i class="material-icons">add</i>
     Add new employee
 </button>

@@ -21,7 +21,7 @@
     &__buttons {
       display: flex;
       flex-grow: 1;
-      justify-content: center;
+      justify-content: space-between;
 
       button {
         padding: 0.5em 1em;

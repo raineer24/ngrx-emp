@@ -1,17 +1,13 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-
-// import * as employeeActions from '../state/employee.actions';
-// import * as fromEmployee from '../state/employee.reducer';
 
 import * as countryActions from '../../countries/state/country.actions';
 import * as fromCountry from '../../countries/state/country.reducer';
+import * as fromEmployee from '../state/employee.reducer';
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Country } from 'src/app/global/models';
+import { Country, Employee } from 'src/app/global/models';
 
 @Component({
   selector: 'app-employee-info',
@@ -21,16 +17,42 @@ import { Country } from 'src/app/global/models';
 export class EmployeeInfoComponent implements OnInit {
   currentUrl: string;
   title: string;
+  viewmode: string;
+  disableForm: boolean;
+  setAction: string;
   countries$: Observable<Country[]>;
 
-  constructor(private store: Store<fromCountry.AppState>) { }
+  constructor(
+    private store: Store<fromCountry.AppState>,
+    private storeEmployee: Store<fromEmployee.AppState>,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.title = 'New Employee';
+    this.setAction = 'new';
     this.store.dispatch(new countryActions.LoadCountriesAction());
     this.countries$ = this.store.pipe(select(fromCountry.getCountries));
-  }
+    let viewmode = this.route.snapshot.paramMap.get('viewmode');
+    let id = this.route.snapshot.paramMap.get('id');
 
+    const employee$: Observable<Employee> = this.storeEmployee.select(
+      fromEmployee.getCurrentElemployee
+    );
     
-
+    employee$.subscribe( user => {
+      if(user){
+        if(viewmode) {
+          this.title = `Viewing: ${user.name}`;
+          this.disableForm = true;
+        }
+        else {
+          if(id) {
+            this.title = `Editing: ${user.name}`;
+            this.setAction = 'edit';
+          } 
+          this.disableForm = false;
+        }
+      }
+    });
+  }
 }

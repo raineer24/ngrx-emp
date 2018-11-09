@@ -1,12 +1,13 @@
 <form [formGroup]="employeeForm" class="form">
 
-  value: {{ employeeForm.value | json}}
-  
   <div class="form__group">
     <div class="form__group__field">  
       <span class="fieldname">Name:</span>
       <mat-form-field>
         <input matInput formControlName="name">
+        <mat-error *ngIf="!employeeForm.controls['name'].valid">
+          Name is required
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -27,15 +28,26 @@
     <div class="form__group__field">
       <span class="fieldname">Dob:</span>
       <mat-form-field>
-        <input matInput [matDatepicker]="dobPicker" formControlName="dob" placeholder="Choose a date">
+        <input matInput [matDatepicker]="dobPicker" formControlName="dob" (change)="validateDOB(dob)">
         <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
         <mat-datepicker #dobPicker></mat-datepicker>
+        <mat-error *ngIf="!employeeForm.controls['dob'].valid">
+          Dob is required
+        </mat-error>
+        <mat-error *ngIf="!isDobValid && employeeForm.controls['dob'].valid">
+          Dob is invalid
+        </mat-error>
       </mat-form-field>
     </div>
       
     <div class="form__group__field">
       <span class="fieldname">Job title:</span>
-      <app-dropdown [area]="areaSelected" (jobSelected)=newJob($event)></app-dropdown>
+      <app-dropdown 
+        [area]="areaSelected" 
+        (jobSelected)="setJob($event)" 
+        [selected]="dropdownSelected"
+        [isDisabled]="disableForm">
+      </app-dropdown>
     </div>
   </div>
 
@@ -43,11 +55,14 @@
     <div class="form__group__field">
       <span class="fieldname">Country:</span>
       <mat-form-field>
-        <mat-select placeholder="Select the Country" formControlName="country">
+        <mat-select formControlName="country">
           <mat-option *ngFor="let country of (countries | async)" [value]="country.alpha2Code">
             {{country.nativeName}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="!employeeForm.controls['country'].valid">
+            Country is required
+        </mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -57,6 +72,12 @@
       <span class="fieldname">Username:</span>
       <mat-form-field>
         <input matInput formControlName="username">
+        <mat-error *ngIf="!employeeForm.controls['username'].valid">
+            Username is required
+        </mat-error>
+        <!-- <mat-error *ngIf="f.username.errors?.pattern">
+          username invalid
+        </mat-error> -->
       </mat-form-field>
     </div>
   </div>
@@ -65,15 +86,21 @@
     <div class="form__group__field">      
       <span class="fieldname">Hire Date:</span>
       <mat-form-field>
-        <input matInput [matDatepicker]="hiredatePicker" formControlName="hiredate" placeholder="Choose a date">
+        <input matInput [matDatepicker]="hiredatePicker" formControlName="hiredate">
         <mat-datepicker-toggle matSuffix [for]="hiredatePicker"></mat-datepicker-toggle>
         <mat-datepicker #hiredatePicker></mat-datepicker>
+        <mat-error *ngIf="!employeeForm.controls['hiredate'].valid">
+            Hire Date is required
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="form__group__field" *ngIf="enableTipRate">
       <span class="fieldname">TipRate: </span>
       <mat-form-field>
-        <input matInput formControlName="tiprate" [value]="employeeForm.get('tiprate').value | number : '1.2'" >
+        <input matInput formControlName="tiprate" [value]="employeeForm.get('tiprate').value | rate">
+        <mat-error *ngIf="!employeeForm.controls['tiprate'].valid">
+            TipRate is required
+        </mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -87,8 +114,13 @@
 
   <div class="form__group">
     <div class="form__group__buttons">
-      <button mat-button (click)="onBack()">Back</button>
-      <button mat-raised-button color="primary" (click)="createEmployee()">Save</button>
+      <button mat-button (click)="onBack()">
+        <i class="material-icons">arrow_back_ios</i> Back</button>
+      <button mat-raised-button 
+        color="primary"
+        [disabled]="!employeeForm.valid"
+        (click)="isNew ? createEmployee() : updateEmployee()" 
+        *ngIf="!disableForm">Save</button>
     </div>
   </div>
   
