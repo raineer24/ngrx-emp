@@ -8,6 +8,9 @@ import { Employee, Country } from '../../../global/models';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { AppDialogComponent } from '../../../global/components';
+
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
@@ -28,9 +31,11 @@ export class EmployeeFormComponent implements OnInit {
   dropdownSelected: string;
   isDobValid: boolean;
 
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    public dialog: MatDialog,
     private store: Store<fromEmployee.AppState>
   ) { }
 
@@ -94,7 +99,30 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onBack(): void {
-    this.router.navigate(['/']);
+    if(this.employeeForm.dirty) {
+      this.openDialog();
+    }
+    else {
+      this.router.navigate(['/']);
+    }
+  }
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        id: 1,
+        title: 'Warning'
+    };
+
+    const dialogRef = this.dialog.open(AppDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.router.navigate(['/']);
+      }
+    });
   }
 
   setJob(value) {
