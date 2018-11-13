@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AppDialogComponent } from '../../../global/components';
+import { ValidateMinAge } from '../../../global/validators';
 
 @Component({
   selector: 'app-employee-form',
@@ -46,7 +47,8 @@ export class EmployeeFormComponent implements OnInit {
       name: ['', [Validators.required]],
       area: ['services', [Validators.required]],
       dob: ['', [
-        Validators.required
+        Validators.required,
+        ValidateMinAge
       ]],
       jobtitle: ['', [Validators.required]],
       country: ['', [Validators.required]],
@@ -139,13 +141,10 @@ export class EmployeeFormComponent implements OnInit {
     }
   }
 
-  validateDOB(e){
-    let year = new Date(e).getFullYear();
-    let today = new Date().getFullYear();
-
-    if(today - year <= 100){
-      this.isDobValid = false;
-    }
+  validateDOB(dob){
+    let age = this.CalculateAge(dob);
+    let minAge = 18;
+    (age < minAge) ? this.isDobValid = false : this.isDobValid = true;
 }
   
   createEmployee() {

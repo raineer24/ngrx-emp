@@ -28,13 +28,13 @@
     <div class="form__group__field">
       <span class="fieldname">Dob:</span>
       <mat-form-field>
-        <input matInput [matDatepicker]="dobPicker" formControlName="dob" (change)="validateDOB(dob)">
+        <input matInput [matDatepicker]="dobPicker" formControlName="dob">
         <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
         <mat-datepicker #dobPicker></mat-datepicker>
-        <mat-error *ngIf="!employeeForm.controls['dob'].valid">
+        <mat-error *ngIf="!f.dob.errors?.validAge && !employeeForm.controls['dob'].valid">
           Dob is required
         </mat-error>
-        <mat-error *ngIf="!isDobValid && employeeForm.controls['dob'].valid">
+        <mat-error *ngIf="f.dob.errors?.validAge">
           Dob is invalid
         </mat-error>
       </mat-form-field>
