@@ -1,20 +1,17 @@
 {
   "employees": [
-      {
-          "id": 1,
-          "name": "Guiacomo Guilizzoni",
-          "jobtitle": "Founder & CEO",
-          "age": 40,
-          "username": "Peldi",
-          "hiredate": "2017/10/01"
-      },
-      {
-          "id": 2,
-          "name": "Marco Botton",
-          "jobtitle": "Tuttofare",
-          "age": 38,
-          "username": "Marcopolo",
-          "hiredate": "2001/01/10"
-      }
+    {
+      "name": "jose romero",
+      "area": "services",
+      "dob": "1980-03-15T05:00:00.000Z",
+      "jobtitle": "host",
+      "country": "JE",
+      "username": "joseromero",
+      "hiredate": "2018-11-30T05:00:00.000Z",
+      "tiprate": "%0.01",
+      "status": true,
+      "age": 38,
+      "id": 1
+    }
   ]
 }
