@@ -1,10 +1,28 @@
-# NgrxEmployees
+# NgrxEmployees Application
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. 
+
+## Dependencies needed
+
+- Nodejs version v8.12.0: `https://nodejs.org/en/`
+- Npm version 6.4.1: `https://www.npmjs.com`
+- Angular CLI: 7.0.4 : `https://cli.angular.io`
+- Concurrently: `https://www.npmjs.com/package/concurrently`
+
+
+##  BitBucket Project
+
+- Project name: `ngrx-employees`
+- Url:  `https://crudaz@bitbucket.org/crudaz/ngrx-employees.git`
+
+
+## Resources
+
+Rest API Resources is located in `http://localhost:3000/employees/` and is loaded from the file `json-server` and the file `db.json`.
 
 ## Code scaffolding
 
