@@ -36,6 +36,17 @@ export class EmployeeService {
     );
   }
 
+  getUserById(payload: number): Observable<User> {
+    return this.http.get<User>(`${this.endpoint}/${payload}`).pipe(
+      map((user) => {
+        console.log("user", user["user"]);
+
+        return user["user"];
+      }),
+      catchError(this.errorMgmt)
+    );
+  }
+
   getEmployeeById(payload: number): Observable<Employee> {
     return this.http.get<Employee>(`${this.endpoint}/${payload}`);
   }

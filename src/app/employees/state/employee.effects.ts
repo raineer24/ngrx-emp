@@ -53,13 +53,31 @@ export class EmployeeEffect {
     )
   );
 
+  // @Effect()
+  // loadEmployee$: Observable<Action> = this.actions$.pipe(
+  //   ofType<employeeActions.LoadEmployeeAction>(
+  //     employeeActions.EmployeeActionTypes.LOAD_EMPLOYEE
+  //   ),
+  //   mergeMap((action: employeeActions.LoadEmployeeAction) =>
+  //     this.employeeService.getEmployeeById(action.payload).pipe(
+  //       map(
+  //         (employee: Employee) =>
+  //           new employeeActions.LoadEmployeeSuccessAction(employee)
+  //       ),
+  //       catchError((err) =>
+  //         of(new employeeActions.LoadEmployeeFailureAction(err))
+  //       )
+  //     )
+  //   )
+  // );
+
   @Effect()
   loadEmployee$: Observable<Action> = this.actions$.pipe(
     ofType<employeeActions.LoadEmployeeAction>(
       employeeActions.EmployeeActionTypes.LOAD_EMPLOYEE
     ),
     mergeMap((action: employeeActions.LoadEmployeeAction) =>
-      this.employeeService.getEmployeeById(action.payload).pipe(
+      this.employeeService.getUserById(action.payload).pipe(
         map(
           (employee: Employee) =>
             new employeeActions.LoadEmployeeSuccessAction(employee)
