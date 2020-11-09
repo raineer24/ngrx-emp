@@ -1,23 +1,23 @@
-import { Action } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
-import { Employee } from '../../global/models';
+import { Action } from "@ngrx/store";
+import { Update } from "@ngrx/entity";
+import { Employee, User } from "../../global/models";
 
 export enum EmployeeActionTypes {
-  LOAD_EMPLOYEES = '[Employee] Load Employees',
-  LOAD_EMPLOYEES_FAILURE = '[Employee] Load Employees Failure',
-  LOAD_EMPLOYEES_SUCCESS = '[Employee] Load Employees Success',
-  LOAD_EMPLOYEE = '[Employee] Load Employee',
-  LOAD_EMPLOYEE_FAILURE = '[Employee] Load Employee Failure',
-  LOAD_EMPLOYEE_SUCCESS = '[Employee] Load Employee Success',
-  CREATE_EMPLOYEE = '[Employee] Create Employee',
-  CREATE_EMPLOYEE_FAILURE = '[Employee] Create Employee Failure',
-  CREATE_EMPLOYEE_SUCCESS = '[Employee] Create Employee Success',
-  UPDATE_EMPLOYEE = '[Employee] Update Employee',
-  UPDATE_EMPLOYEE_FAILURE = '[Employee] Update Employee Failure',
-  UPDATE_EMPLOYEE_SUCCESS = '[Employee] Update Employee Success',
-  DELETE_EMPLOYEE = '[Employee] Delete Employee',
-  DELETE_EMPLOYEE_FAILURE = '[Employee] Delete Employee Failure',
-  DELETE_EMPLOYEE_SUCCESS = '[Employee] Delete Employee Success'
+  LOAD_EMPLOYEES = "[Employee] Load Employees",
+  LOAD_EMPLOYEES_FAILURE = "[Employee] Load Employees Failure",
+  LOAD_EMPLOYEES_SUCCESS = "[Employee] Load Employees Success",
+  LOAD_EMPLOYEE = "[Employee] Load Employee",
+  LOAD_EMPLOYEE_FAILURE = "[Employee] Load Employee Failure",
+  LOAD_EMPLOYEE_SUCCESS = "[Employee] Load Employee Success",
+  CREATE_EMPLOYEE = "[Employee] Create Employee",
+  CREATE_EMPLOYEE_FAILURE = "[Employee] Create Employee Failure",
+  CREATE_EMPLOYEE_SUCCESS = "[Employee] Create Employee Success",
+  UPDATE_EMPLOYEE = "[Employee] Update Employee",
+  UPDATE_EMPLOYEE_FAILURE = "[Employee] Update Employee Failure",
+  UPDATE_EMPLOYEE_SUCCESS = "[Employee] Update Employee Success",
+  DELETE_EMPLOYEE = "[Employee] Delete Employee",
+  DELETE_EMPLOYEE_FAILURE = "[Employee] Delete Employee Failure",
+  DELETE_EMPLOYEE_SUCCESS = "[Employee] Delete Employee Success",
 }
 
 export class LoadEmployeesAction implements Action {
@@ -29,9 +29,14 @@ export class LoadEmployeesFailureAction implements Action {
   constructor(public payload: string) {}
 }
 
+// export class LoadEmployeesSuccessAction implements Action {
+//   readonly type = EmployeeActionTypes.LOAD_EMPLOYEES_SUCCESS;
+//   constructor(public payload: Employee[]) {}
+// }
+
 export class LoadEmployeesSuccessAction implements Action {
   readonly type = EmployeeActionTypes.LOAD_EMPLOYEES_SUCCESS;
-  constructor(public payload: Employee[]) {}
+  constructor(public payload: User[]) {}
 }
 
 export class LoadEmployeeAction implements Action {
@@ -94,19 +99,19 @@ export class DeleteEmployeeSuccessAction implements Action {
   constructor(public payload: number) {}
 }
 
-export type Action = 
-  LoadEmployeesAction | 
-  LoadEmployeesFailureAction | 
-  LoadEmployeesSuccessAction |
-  LoadEmployeeAction | 
-  LoadEmployeeFailureAction | 
-  LoadEmployeeSuccessAction |
-  CreateEmployeeAction | 
-  CreateEmployeeFailureAction | 
-  CreateEmployeeSuccessAction |
-  UpdateEmployeeAction | 
-  UpdateEmployeeFailureAction | 
-  UpdateEmployeeSuccessAction |
-  DeleteEmployeeAction | 
-  DeleteEmployeeFailureAction | 
-  DeleteEmployeeSuccessAction;
+export type Action =
+  | LoadEmployeesAction
+  | LoadEmployeesFailureAction
+  | LoadEmployeesSuccessAction
+  | LoadEmployeeAction
+  | LoadEmployeeFailureAction
+  | LoadEmployeeSuccessAction
+  | CreateEmployeeAction
+  | CreateEmployeeFailureAction
+  | CreateEmployeeSuccessAction
+  | UpdateEmployeeAction
+  | UpdateEmployeeFailureAction
+  | UpdateEmployeeSuccessAction
+  | DeleteEmployeeAction
+  | DeleteEmployeeFailureAction
+  | DeleteEmployeeSuccessAction;

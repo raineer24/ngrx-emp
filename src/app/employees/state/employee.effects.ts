@@ -41,10 +41,10 @@ export class EmployeeEffect {
       employeeActions.EmployeeActionTypes.LOAD_EMPLOYEES
     ),
     mergeMap((actions: employeeActions.LoadEmployeesAction) =>
-      this.employeeService.getEmployees().pipe(
+      this.employeeService.getUsers().pipe(
         map(
-          (employees: Employee[]) =>
-            new employeeActions.LoadEmployeesSuccessAction(employees)
+          (users: User[]) =>
+            new employeeActions.LoadEmployeesSuccessAction(users)
         ),
         catchError((err) =>
           of(new employeeActions.LoadEmployeesFailureAction(err))
