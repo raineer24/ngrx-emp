@@ -1,9 +1,16 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 
-import { Observable } from "rxjs";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+  HttpErrorResponse,
+} from "@angular/common/http";
 
 import { Employee, User } from "../global/models";
+import { map, tap, catchError, first } from "rxjs/operators";
+
+import { Subject, Observable, BehaviorSubject, throwError } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -19,7 +26,14 @@ export class EmployeeService {
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.endpoint);
+    return this.http.get<User[]>(this.endpoint).pipe(
+      map((user) => {
+        console.log("user", user["user"]);
+
+        return user["user"];
+      }),
+      catchError(this.errorMgmt)
+    );
   }
 
   getEmployeeById(payload: number): Observable<Employee> {
@@ -39,5 +53,21 @@ export class EmployeeService {
 
   deleteEmployee(payload: number) {
     return this.http.delete(`${this.endpoint}/${payload}`);
+  }
+
+  // error handling
+  errorMgmt(error: HttpErrorResponse) {
+    let errorMessage = "";
+    console.log("error", error);
+
+    if (error.error instanceof ErrorEvent) {
+      // get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(errorMessage);
   }
 }

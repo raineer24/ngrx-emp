@@ -6,7 +6,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 import { Employee, User } from "../../global/models";
 import * as fromRoot from "../../state/app-state";
 
-export interface EmployeeState extends EntityState<Employee> {
+export interface EmployeeState extends EntityState<User> {
   selectedEmployeeId: number | null;
   loading: boolean;
   loaded: boolean;
