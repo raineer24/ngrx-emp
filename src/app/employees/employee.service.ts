@@ -3,18 +3,23 @@ import { HttpClient } from "@angular/common/http";
 
 import { Observable } from "rxjs";
 
-import { Employee } from "../global/models";
+import { Employee, User } from "../global/models";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class EmployeeService {
-  private endpoint = "http://localhost:3000/employees";
+  //private endpoint = "http://localhost:3000/employees";
+  private endpoint = "http://localhost:3000/api/v2/users";
 
   constructor(private http: HttpClient) {}
 
   getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.endpoint);
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.endpoint);
   }
 
   getEmployeeById(payload: number): Observable<Employee> {
