@@ -79,8 +79,7 @@ export class EmployeeEffect {
     mergeMap((action: employeeActions.LoadEmployeeAction) =>
       this.employeeService.getUserById(action.payload).pipe(
         map(
-          (employee: Employee) =>
-            new employeeActions.LoadEmployeeSuccessAction(employee)
+          (user: User) => new employeeActions.LoadEmployeeSuccessAction(user)
         ),
         catchError((err) =>
           of(new employeeActions.LoadEmployeeFailureAction(err))
@@ -95,10 +94,10 @@ export class EmployeeEffect {
       employeeActions.EmployeeActionTypes.CREATE_EMPLOYEE
     ),
     map((action: employeeActions.CreateEmployeeAction) => action.payload),
-    mergeMap((employee: Employee) =>
+    mergeMap((employee: User) =>
       this.employeeService.createEmployee(employee).pipe(
         map(
-          (newEmployee: Employee) =>
+          (newEmployee: User) =>
             new employeeActions.CreateEmployeeSuccessAction(newEmployee)
         ),
         catchError((err) =>

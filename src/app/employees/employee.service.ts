@@ -51,8 +51,8 @@ export class EmployeeService {
     return this.http.get<Employee>(`${this.endpoint}/${payload}`);
   }
 
-  createEmployee(payload: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.endpoint, payload);
+  createEmployee(payload: User): Observable<User> {
+    return this.http.post<User>(this.endpoint, payload);
   }
 
   updateEmployee(employee: Employee): Observable<Employee> {

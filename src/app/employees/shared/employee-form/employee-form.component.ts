@@ -76,23 +76,23 @@ export class EmployeeFormComponent implements OnInit {
         fromEmployee.getCurrentElemployee
       );
 
-      // employee$.subscribe((currentEmployee) => {
-      //   if (currentEmployee) {
-      //     this.dropdownSelected = currentEmployee.jobtitle;
-      //     this.employeeForm.patchValue({
-      //       name: currentEmployee.name,
-      //       area: currentEmployee.area,
-      //       dob: currentEmployee.dob,
-      //       jobtitle: currentEmployee.jobtitle,
-      //       country: currentEmployee.country,
-      //       username: currentEmployee.username,
-      //       hiredate: currentEmployee.hiredate,
-      //       tiprate: currentEmployee.tiprate,
-      //       status: currentEmployee.status,
-      //       id: currentEmployee.id,
-      //     });
-      //   }
-      // });
+      employee$.subscribe((currentEmployee) => {
+        if (currentEmployee) {
+          //this.dropdownSelected = currentEmployee.jobtitle;
+          this.employeeForm.patchValue({
+            name: currentEmployee.first_name,
+            // area: currentEmployee.area,
+            // dob: currentEmployee.dob,
+            // jobtitle: currentEmployee.jobtitle,
+            // country: currentEmployee.country,
+            // username: currentEmployee.username,
+            // hiredate: currentEmployee.hiredate,
+            // tiprate: currentEmployee.tiprate,
+            // status: currentEmployee.status,
+            // id: currentEmployee.id,
+          });
+        }
+      });
     }
 
     if (this.disableForm) {
@@ -151,28 +151,26 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   createEmployee() {
-    if (this.employeeForm.valid) {
-      this.submitted = true;
-
-      const newEmployee: Employee = {
-        name: this.employeeForm.get("name").value,
-        area: this.employeeForm.get("area").value,
-        dob: this.employeeForm.get("dob").value,
-        jobtitle: this.employeeForm.get("jobtitle").value,
-        country: this.employeeForm.get("country").value,
-        username: this.employeeForm.get("username").value,
-        hiredate: this.employeeForm.get("hiredate").value,
-        tiprate: this.employeeForm.get("tiprate").value,
-        status: this.employeeForm.get("status").value,
-      };
-
-      newEmployee.age = this.CalculateAge(newEmployee.dob);
-      this.store.dispatch(
-        new employeeActions.CreateEmployeeAction(newEmployee)
-      );
-      this.employeeForm.reset();
-      this.router.navigate(["/"]);
-    }
+    // if (this.employeeForm.valid) {
+    //   this.submitted = true;
+    //   const newEmployee: Employee = {
+    //     name: this.employeeForm.get("name").value,
+    //     area: this.employeeForm.get("area").value,
+    //     dob: this.employeeForm.get("dob").value,
+    //     jobtitle: this.employeeForm.get("jobtitle").value,
+    //     country: this.employeeForm.get("country").value,
+    //     username: this.employeeForm.get("username").value,
+    //     hiredate: this.employeeForm.get("hiredate").value,
+    //     tiprate: this.employeeForm.get("tiprate").value,
+    //     status: this.employeeForm.get("status").value,
+    //   };
+    //   newEmployee.age = this.CalculateAge(newEmployee.dob);
+    //   this.store.dispatch(
+    //     new employeeActions.CreateEmployeeAction(newEmployee)
+    //   );
+    //   this.employeeForm.reset();
+    //   this.router.navigate(["/"]);
+    // }
   }
 
   updateEmployee() {

@@ -29,7 +29,7 @@ export class LoadEmployeesFailureAction implements Action {
   constructor(public payload: string) {}
 }
 
-// export class LoadEmployeesSuccessAction implements Action {
+// export class LoadEmployeesSuccessActi98100000445501on implements Action {
 //   readonly type = EmployeeActionTypes.LOAD_EMPLOYEES_SUCCESS;
 //   constructor(public payload: Employee[]) {}
 // }
@@ -51,12 +51,12 @@ export class LoadEmployeeFailureAction implements Action {
 
 export class LoadEmployeeSuccessAction implements Action {
   readonly type = EmployeeActionTypes.LOAD_EMPLOYEE_SUCCESS;
-  constructor(public payload: Employee) {}
+  constructor(public payload: User) {}
 }
 
 export class CreateEmployeeAction implements Action {
   readonly type = EmployeeActionTypes.CREATE_EMPLOYEE;
-  constructor(public payload: Employee) {}
+  constructor(public payload: User) {}
 }
 
 export class CreateEmployeeFailureAction implements Action {
@@ -66,7 +66,7 @@ export class CreateEmployeeFailureAction implements Action {
 
 export class CreateEmployeeSuccessAction implements Action {
   readonly type = EmployeeActionTypes.CREATE_EMPLOYEE_SUCCESS;
-  constructor(public payload: Employee) {}
+  constructor(public payload: User) {}
 }
 
 export class UpdateEmployeeAction implements Action {

@@ -17,9 +17,7 @@ export interface AppState extends fromRoot.AppState {
   employees: EmployeeState;
 }
 
-export const employeeAdapter: EntityAdapter<User> = createEntityAdapter<
-  Employee
->();
+export const employeeAdapter: EntityAdapter<User> = createEntityAdapter<User>();
 
 export const defaultEmployee: EmployeeState = {
   ids: [],
