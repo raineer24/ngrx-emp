@@ -85,7 +85,7 @@ export class EmployeeFormComponent implements OnInit {
             // dob: currentEmployee.dob,
             // jobtitle: currentEmployee.jobtitle,
             // country: currentEmployee.country,
-            // username: currentEmployee.username,
+            username: currentEmployee.username,
             // hiredate: currentEmployee.hiredate,
             // tiprate: currentEmployee.tiprate,
             // status: currentEmployee.status,
@@ -174,17 +174,18 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   updateEmployee() {
-    const updateEmployee: Employee = {
-      name: this.employeeForm.get("name").value,
-      area: this.employeeForm.get("area").value,
-      dob: this.employeeForm.get("dob").value,
-      jobtitle: this.employeeForm.get("jobtitle").value,
-      country: this.employeeForm.get("country").value,
+    const updateEmployee: User = {
+      first_name: this.employeeForm.get("first_name").value,
       username: this.employeeForm.get("username").value,
-      hiredate: this.employeeForm.get("hiredate").value,
-      tiprate: this.employeeForm.get("tiprate").value,
-      status: this.employeeForm.get("status").value,
-      id: this.employeeForm.get("id").value,
+      // area: this.employeeForm.get("area").value,
+      // dob: this.employeeForm.get("dob").value,
+      // jobtitle: this.employeeForm.get("jobtitle").value,
+      // country: this.employeeForm.get("country").value,
+      // username: this.employeeForm.get("username").value,
+      // hiredate: this.employeeForm.get("hiredate").value,
+      // tiprate: this.employeeForm.get("tiprate").value,
+      // status: this.employeeForm.get("status").value,
+      // id: this.employeeForm.get("id").value,
     };
 
     this.store.dispatch(

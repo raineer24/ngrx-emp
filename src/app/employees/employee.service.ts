@@ -55,11 +55,16 @@ export class EmployeeService {
     return this.http.post<User>(this.endpoint, payload);
   }
 
-  updateEmployee(employee: Employee): Observable<Employee> {
-    return this.http.patch<Employee>(
-      `${this.endpoint}/${employee.id}`,
-      employee
-    );
+  // updateEmployee(employee: Employee): Observable<Employee> {
+  //   return this.http.patch<Employee>(
+  //     `${this.endpoint}/${employee.id}`,
+  //     employee
+  //   );
+  // }
+
+  updateUser(employee: User): Observable<User> {
+    return this.http.put<User>(`${this.endpoint}/${employee.id}`, employee);
+    //localhost:3000/api/v2/users/profile/12
   }
 
   deleteEmployee(payload: number) {

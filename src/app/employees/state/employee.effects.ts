@@ -113,10 +113,10 @@ export class EmployeeEffect {
       employeeActions.EmployeeActionTypes.UPDATE_EMPLOYEE
     ),
     map((action: employeeActions.UpdateEmployeeAction) => action.payload),
-    mergeMap((employee: Employee) =>
-      this.employeeService.updateEmployee(employee).pipe(
+    mergeMap((user: User) =>
+      this.employeeService.updateUser(user).pipe(
         map(
-          (updateEmployee: Employee) =>
+          (updateEmployee: User) =>
             new employeeActions.UpdateEmployeeSuccessAction({
               id: updateEmployee.id,
               changes: updateEmployee,

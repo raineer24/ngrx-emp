@@ -71,7 +71,7 @@ export class CreateEmployeeSuccessAction implements Action {
 
 export class UpdateEmployeeAction implements Action {
   readonly type = EmployeeActionTypes.UPDATE_EMPLOYEE;
-  constructor(public payload: Employee) {}
+  constructor(public payload: User) {}
 }
 
 export class UpdateEmployeeFailureAction implements Action {
