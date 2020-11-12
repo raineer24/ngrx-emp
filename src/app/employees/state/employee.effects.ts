@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 
 import { Observable, of } from "rxjs";
-import { map, mergeMap, catchError } from "rxjs/operators";
+import { map, mergeMap, catchError, flatMap } from "rxjs/operators";
 
 import { EmployeeService } from "../employee.service";
 import * as employeeActions from "../state/employee.actions";
@@ -71,6 +71,26 @@ export class EmployeeEffect {
   //   )
   // );
 
+  // @Effect()
+  // loadEmployee$: Observable<Action> = this.actions$.pipe(
+  //   ofType<employeeActions.LoadEmployeeAction>(
+  //     employeeActions.EmployeeActionTypes.LOAD_EMPLOYEE
+  //   ),
+  //   mergeMap((action: employeeActions.LoadEmployeeAction) =>
+  //     this.employeeService.getUserById(action.payload).pipe(
+  //       // map(
+  //       //   (user: User) => new employeeActions.LoadEmployeeSuccessAction(user)
+  //       // ),
+  //       map(
+  //         (user: User) => new employeeActions.LoadEmployeeSuccessAction(user)
+  //       ),
+  //       catchError((err) =>
+  //         of(new employeeActions.LoadEmployeeFailureAction(err))
+  //       )
+  //     )
+  //   )
+  // );
+
   @Effect()
   loadEmployee$: Observable<Action> = this.actions$.pipe(
     ofType<employeeActions.LoadEmployeeAction>(
@@ -78,6 +98,9 @@ export class EmployeeEffect {
     ),
     mergeMap((action: employeeActions.LoadEmployeeAction) =>
       this.employeeService.getUserById(action.payload).pipe(
+        // map(
+        //   (user: User) => new employeeActions.LoadEmployeeSuccessAction(user)
+        // ),
         map(
           (user: User) => new employeeActions.LoadEmployeeSuccessAction(user)
         ),

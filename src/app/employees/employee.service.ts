@@ -28,6 +28,8 @@ export class EmployeeService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.endpoint).pipe(
       map((user) => {
+        console.log("data: ", user);
+
         console.log("user", user["user"]);
 
         return user["user"];
@@ -37,15 +39,61 @@ export class EmployeeService {
   }
 
   getUserById(payload: number): Observable<User> {
-    return this.http.get<User>(`${this.endpoint}/${payload}`).pipe(
-      map((user) => {
-        console.log("user", user["user"]);
+    const url = `http://localhost:3000/api/v2/users/profile/${payload}`;
+    console.log("url", url);
 
-        return user["user"];
+    //const url = `${this.apiurl}/${id}`;
+    // return this.http.get<User>(`${baseUrl}/${id}`);
+    // const url = `${this.baseUrl}/api/v2/users/profile/${id}`;
+    return this.http.get<User>(url).pipe(
+      map((user) => {
+        // console.log("user", user["user"].user_skill_set[0]);
+
+        console.log("data", user);
+
+        let areas_of_expertise = user["user"].user_skill_set[0].skills[0];
+        // user.forEach((eachData) => {
+        //   // console.log('Employee Name ---> ',eachData.addEmployee.firstName);
+        //   // eachData.attendances.forEach(atten => {
+        //   //   console.log('attendance Object -->',atten);
+
+        //   //  return Object.assign({}, json, { skills });
+        //   console.log("foreach", eachData);
+        // });
+        // console.log(Object.assign({}, user["user"], { areas_of_expertise }));
+        return Object.assign({}, user["user"], { areas_of_expertise });
+
+        //return user["user"];
       }),
       catchError(this.errorMgmt)
     );
   }
+
+  // getUserById(payload: number): Observable<User> {
+  //   return this.http.get<User>(`${this.endpoint}/${payload}`).pipe(
+  //     map((user) => {
+  //       console.log("user", user["user"]);
+
+  //       return user["user"];
+  //     }),
+  //     catchError(this.errorMgmt)
+  //   );
+  // }
+
+  // getUserById(payload: number): Observable<User> {
+  //   const url = `http://localhost:3000/api/v2/users/profile/${payload}`;
+  //   //private endpoint = "http://localhost:3000/api/v2/users";
+  //   return this.http.get<User>(url).pipe(
+  //     map((user) => {
+  //       console.log("data", user);
+
+  //       console.log("user", user["user"]);
+
+  //       return user["user"];
+  //     }),
+  //     catchError(this.errorMgmt)
+  //   );
+  // }
 
   getEmployeeById(payload: number): Observable<Employee> {
     return this.http.get<Employee>(`${this.endpoint}/${payload}`);
