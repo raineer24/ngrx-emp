@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 
 import { Observable, of } from "rxjs";
-import { map, mergeMap, catchError, flatMap } from "rxjs/operators";
+import { map, mergeMap, catchError, flatMap, take } from "rxjs/operators";
 
 import { EmployeeService } from "../employee.service";
 import * as employeeActions from "../state/employee.actions";
@@ -98,9 +98,7 @@ export class EmployeeEffect {
     ),
     mergeMap((action: employeeActions.LoadEmployeeAction) =>
       this.employeeService.getUserById(action.payload).pipe(
-        // map(
-        //   (user: User) => new employeeActions.LoadEmployeeSuccessAction(user)
-        // ),
+        take(1),
         map(
           (user: User) => new employeeActions.LoadEmployeeSuccessAction(user)
         ),
@@ -109,6 +107,21 @@ export class EmployeeEffect {
         )
       )
     )
+    // flatMap((action: employeeActions.LoadEmployeeAction) => {
+    //    this.employeeService.getUserById(action.payload).pipe(
+    //     take(1),
+    //     map((user) => {
+    //       console.log("data", user);
+
+    //       console.log("map effect");
+    //       new employeeActions.LoadEmployeeSuccessAction(user);
+    //       //return new userActions.LoadProfileSuccess(data["user"]);
+    //     }),
+    //     catchError((err) =>
+    //       of(new employeeActions.LoadEmployeeFailureAction(err))
+    //     )
+    //   );
+    // })
   );
 
   @Effect()

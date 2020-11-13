@@ -32,7 +32,13 @@ export class EmployeeService {
 
         console.log("user", user["user"]);
 
-        return user["user"];
+        let data = user["user"];
+
+        this.setTokenInLocalStorage(data);
+        const datus = JSON.parse(localStorage.getItem("user"));
+        console.log("datus", datus);
+
+        return data;
       }),
       catchError(this.errorMgmt)
     );
@@ -51,7 +57,12 @@ export class EmployeeService {
 
         console.log("data", user);
 
-        let areas_of_expertise = user["user"].user_skill_set[0].skills[0];
+        let boolean = user["success"];
+        console.log("boolean", typeof boolean);
+        if (boolean === true) {
+          console.log("true");
+        }
+        // let areas_of_expertise = user["user"].user_skill_set[0].skills[0];
         // user.forEach((eachData) => {
         //   // console.log('Employee Name ---> ',eachData.addEmployee.firstName);
         //   // eachData.attendances.forEach(atten => {
@@ -61,12 +72,25 @@ export class EmployeeService {
         //   console.log("foreach", eachData);
         // });
         // console.log(Object.assign({}, user["user"], { areas_of_expertise }));
-        return Object.assign({}, user["user"], { areas_of_expertise });
+        // return Object.assign({}, user["user"], { areas_of_expertise });
 
-        //return user["user"];
+        return user["user"];
       }),
       catchError(this.errorMgmt)
     );
+  }
+
+  /**
+   *
+   *
+   * @private
+   * @param {any} user_data
+   *
+   * @memberof AuthService
+   */
+  private setTokenInLocalStorage(user_data): void {
+    const jsonData = JSON.stringify(user_data);
+    localStorage.setItem("user", jsonData);
   }
 
   // getUserById(payload: number): Observable<User> {

@@ -77,6 +77,8 @@ export class EmployeeFormComponent implements OnInit {
       );
 
       employee$.subscribe((currentEmployee) => {
+        console.log("currentEMployee", currentEmployee);
+
         if (currentEmployee) {
           //this.dropdownSelected = currentEmployee.jobtitle;
           this.employeeForm.patchValue({
